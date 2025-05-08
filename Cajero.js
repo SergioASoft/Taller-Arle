@@ -37,7 +37,7 @@ let depositar = () => {
             alert("El valor a depositar debe ser mayor a $0")
         }
     }while (deposito<=0 || isNaN(deposito))
-    saldo = saldo + deposito
+    saldo += deposito
     alert("Se han depositado $" + deposito + " en su cuenta")
     registroDeposito(deposito)
 }
@@ -57,14 +57,22 @@ let retirar = () => {
     registroRetiro(retiro)
 }
 
-let registroDeposito = (deposito) => movimientos.push("+ $"+deposito+" \n")
-let registroRetiro = (retiro) => movimientos.push("- $"+retiro+" \n")
-
-let consultarmovimientos= () => {
-    let mensaje=""
+let registroDeposito = (deposito) => {
     if (movimientos.length>=5){
         movimientos.shift()
     }
+    movimientos.push("+ $"+deposito+" \n")
+}
+let registroRetiro = (retiro) => {
+    if (movimientos.length>=5){
+        movimientos.shift()
+    }
+    movimientos.push("+ $"+retiro+" \n")
+    
+} 
+
+let consultarmovimientos= () => {
+    let mensaje=""
     for (mov of movimientos){
         mensaje+= mov    
     }
