@@ -67,7 +67,7 @@ let registroRetiro = (retiro) => {
     if (movimientos.length>=5){
         movimientos.shift()
     }
-    movimientos.push("+ $"+retiro+" \n")
+    movimientos.push("- $"+retiro+" \n")
     
 } 
 
