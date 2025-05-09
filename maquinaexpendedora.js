@@ -1,51 +1,38 @@
-let productos = ["Gaseosa", "Chocolate", "Caramelos", "Galletas", "Papas"];
-let cantidades = [3, 2, 5, 0, 4];
+let productos = ["Galletas", "Chicles", "Chocolate", "Gaseosa", "Papas"];
+let cantidades = [3, 2, 4, 1, 5]; // Cantidad disponible de cada producto
 
+// Mostrar el inventario
 const mostrarInventario = () => {
-    let inventario = "Inventario:\n";
+    let mensaje = "Inventario:\n";
     for (let i = 0; i < productos.length; i++) {
-        inventario += `${i + 1}. ${productos[i]} - Cantidad: ${cantidades[i]}\n`;
+        mensaje += `${i + 1}. ${productos[i]} - ${cantidades[i]} unidades\n`;
     }
-    alert(inventario);
+    alert(mensaje);
 };
 
-const sugerirProducto = () => {
-    for (let i = 0; i < cantidades.length; i++) {
-        if (cantidades[i] > 0) return productos[i];
-    }
-    return null;
-};
-
+// Comprar un producto
 const comprarProducto = (codigo) => {
     if (codigo < 1 || codigo > productos.length) {
-        alert("Código inválido.");
-    } else if (cantidades[codigo - 1] <= 0) {
-        let sugerencia = sugerirProducto();
-        if (sugerencia) {
-            alert(`Producto agotado. ¿Por qué no pruebas con: ${sugerencia}?`);
-        } else {
-            alert("Todos los productos están agotados.");
-        }
+        alert("Código inválido. Elige un número del 1 al 5.");
+    } else if (cantidades[codigo - 1] === 0) {
+        alert("Producto agotado.");
     } else {
         cantidades[codigo - 1]--;
-        alert(`Entregando ${productos[codigo - 1]}. ¡Gracias por tu compra!`);
+        alert(`Has comprado ${productos[codigo - 1]}. ¡Gracias!`);
     }
 };
 
+// Menú principal
 while (true) {
-    let opcion = prompt("1. Ver productos\n2. Comprar\n3. Salir");
+    let opcion = prompt("Máquina Expendedora\n1. Ver inventario\n2. Comprar producto\n3. Salir\nElige una opción:");
+
     if (opcion === "1") {
         mostrarInventario();
     } else if (opcion === "2") {
-        let moneda = prompt("Inserta $1 para continuar (escribe 1):");
-        if (moneda === "1") {
-            let codigo = parseInt(prompt("Ingresa el código del producto (1-5):"));
-            comprarProducto(codigo);
-        } else {
-            alert("Moneda incorrecta.");
-        }
+        let codigo = parseInt(prompt("Ingresa el número del producto (1-5):"));
+        comprarProducto(codigo);
     } else if (opcion === "3") {
-        alert("Saliendo...");
+        alert("¡Gracias por usar la máquina!");
         break;
     } else {
         alert("Opción inválida.");
